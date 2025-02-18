@@ -10,11 +10,11 @@ Globals:
         HttpMethod: "*"
 
 Resources:
-  # 1️⃣ SQS Queue for Import Processing
+  # SQS Queue for Import Processing
   ImportQueue:
     Type: AWS::SQS::Queue
 
-  # 2️⃣ DynamoDB Table:: Categories Table
+  # DynamoDB Table:: Categories Table
   WooCommerceCategories:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -27,7 +27,7 @@ Resources:
         - AttributeName: CategoryID
           KeyType: HASH
 
-  # 3️⃣ DynamoDB Table: IImport Status Table
+  # DynamoDB Table: Import Status Table
   WooCommerceImportStatus:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -40,7 +40,7 @@ Resources:
         - AttributeName: ImportID
           KeyType: HASH
 
-  # 4️⃣ ImportFunction
+  # ImportFunction
   ImportFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -60,7 +60,7 @@ Resources:
             Path: /import
             Method: post
 
-  # 5️⃣ ProcessFunction
+  # ProcessFunction
   ProcessFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -82,7 +82,7 @@ Resources:
             Queue: !GetAtt ImportQueue.Arn
             BatchSize: 1
 
-  # 6️⃣ SCheckStatusFunction
+  # CheckStatusFunction
   CheckStatusFunction:
     Type: AWS::Serverless::Function
     Properties:
