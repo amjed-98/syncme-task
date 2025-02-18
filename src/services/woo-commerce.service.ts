@@ -25,5 +25,3 @@ type Category = {
   description: string;
   display: string;
 };
-
-WooCommerceService.fetchCategories().then(console.log);
