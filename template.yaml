@@ -1,0 +1,98 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Api:
+    MethodSettings:
+      - DataTraceEnabled: true
+        LoggingLevel: ERROR
+        ResourcePath: "/*"
+        HttpMethod: "*"
+
+Resources:
+  # 1️⃣ SQS Queue for Import Processing
+  ImportQueue:
+    Type: AWS::SQS::Queue
+
+  # 2️⃣ DynamoDB Table:: Categories Table
+  WooCommerceCategories:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Categories
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: CategoryID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: CategoryID
+          KeyType: HASH
+
+  # 3️⃣ DynamoDB Table: IImport Status Table
+  WooCommerceImportStatus:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Import_Status
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: ImportID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: ImportID
+          KeyType: HASH
+
+  # 4️⃣ ImportFunction
+  ImportFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/handlers/import.handler
+      Runtime: nodejs22.x
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - SQSSendMessagePolicy:
+            QueueName: !GetAtt ImportQueue.QueueName
+      Environment:
+        Variables:
+          SQS_QUEUE_URL: !Ref ImportQueue
+      Events:
+        ImportAPI:
+          Type: Api
+          Properties:
+            Path: /import
+            Method: post
+
+  # 5️⃣ ProcessFunction
+  ProcessFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/handlers/process.handler
+      Runtime: nodejs22.x
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - Statement:
+            - Effect: Allow
+              Action:
+                - sqs:ReceiveMessage
+                - sqs:DeleteMessage
+                - sqs:GetQueueAttributes
+              Resource: !GetAtt ImportQueue.Arn
+      Events:
+        SQSTrigger:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt ImportQueue.Arn
+            BatchSize: 1
+
+  # 6️⃣ SCheckStatusFunction
+  CheckStatusFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/handlers/check-status.handler
+      Runtime: nodejs22.x
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        StatusAPI:
+          Type: Api
+          Properties:
+            Path: /status
+            Method: get

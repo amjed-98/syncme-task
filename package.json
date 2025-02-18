@@ -1,0 +1,22 @@
+{
+  "name": "syncme-task",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc && pnpm prune --prod && sam build",
+    "dev": "pnpm i && tsc && sam local start-api",
+    "build:deploy": "pnpm build && sam deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  }
+}
