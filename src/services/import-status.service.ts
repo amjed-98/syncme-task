@@ -1,11 +1,10 @@
+import { DB_TABLES } from "../config";
 import { DBService } from "./db.service";
 
 export class ImportStatusService {
-  static readonly #STATUS_TABLE = "Import_Status";
-
   static async getLatestStatus() {
     const result = await DBService.getItem<ImportStatusItem>(
-      this.#STATUS_TABLE,
+      DB_TABLES.importStatus,
       { ImportID: "latest" },
     );
 
@@ -15,7 +14,7 @@ export class ImportStatusService {
   }
 
   static async update(status: Status): Promise<void> {
-    await DBService.putItem(this.#STATUS_TABLE, {
+    await DBService.putItem(DB_TABLES.importStatus, {
       ImportID: "latest",
       Status: status,
       Timestamp: new Date().toISOString(),

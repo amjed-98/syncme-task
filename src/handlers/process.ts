@@ -1,7 +1,8 @@
+import { DB_TABLES } from "../config";
 import { DBService } from "../services/db.service";
 import { ImportStatusService } from "../services/import-status.service";
 import { WooCommerceService } from "../services/woo-commerce.service";
-import { ErrorResponse, SuccessResponse } from "../utils";
+import { ErrorResponse, sleep, SuccessResponse } from "../utils";
 
 export async function handler() {
   try {
@@ -9,8 +10,10 @@ export async function handler() {
 
     const categories = await WooCommerceService.fetchCategories();
 
+    await sleep(2000);
+
     await DBService.batchWrite(
-      "Categories",
+      DB_TABLES.categories,
       categories.map((category) => ({
         CategoryID: category.id.toString(),
         Name: category.name,

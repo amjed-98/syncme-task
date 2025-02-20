@@ -1,9 +1,6 @@
 import AWS from "aws-sdk";
-import dotenv from "dotenv";
 import { ImportStatusService } from "../services/import-status.service";
-import { ErrorResponse, SuccessResponse } from "../utils";
-
-dotenv.config();
+import { ErrorResponse, sleep, SuccessResponse } from "../utils";
 
 const sqs = new AWS.SQS();
 
@@ -16,6 +13,7 @@ export async function handler() {
       QueueUrl: process.env.SQS_QUEUE_URL!,
     };
 
+    await sleep(2000);
     await sqs.sendMessage(sqsParams).promise();
 
     return new SuccessResponse(202, { message: "Import request received" });
@@ -24,3 +22,5 @@ export async function handler() {
     return new ErrorResponse(500, "Internal Server Error");
   }
 }
+
+// https://sqs.us-east-1.amazonaws.com/248189928110/syncme-task-ImportQueue-wU1CQKDz3gWq

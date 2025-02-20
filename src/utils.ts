@@ -29,3 +29,7 @@ const ErrorStatusToTextMap: Record<number, string> = {
   404: "Not Found",
   500: "Internal Server Error",
 };
+
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

@@ -96,3 +96,33 @@ Resources:
           Properties:
             Path: /status
             Method: get
+
+  # GetCategoriesFunction
+  GetCategoriesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/handlers/get-categories.handler
+      Runtime: nodejs22.x
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        GetCategoriesAPI:
+          Type: Api
+          Properties:
+            Path: /categories
+            Method: get
+
+  # DeleteCategoryFunction
+  DeleteCategoryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/handlers/delete-category.handler
+      Runtime: nodejs22.x
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        DeleteCategoryAPI:
+          Type: Api
+          Properties:
+            Path: /categories/{id}
+            Method: delete
