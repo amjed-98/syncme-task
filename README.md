@@ -28,7 +28,7 @@ This project is a **serverless API** built using **AWS Lambda, API Gateway, SQS,
 
 1. **Clone the Repository**
    ```bash
-   git clone github.com/amjed-98/syncme-task
+   git clone https://github.com/amjed-98/syncme-task.git
    cd syncme-task
    ```
 2. **Install Dependencies**
