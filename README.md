@@ -41,6 +41,10 @@ This project is a **serverless API** built using **AWS Lambda, API Gateway, SQS,
    ```
 4. **Get the API Gateway URL from deployment logs**.
 
+## Architecture
+
+![Architecture Diagram](diagram.png)
+
 ## API Endpoints
 
 ### 1️⃣ Import Categories (Async)
