@@ -22,5 +22,3 @@ export async function handler() {
     return new ErrorResponse(500, "Internal Server Error");
   }
 }
-
-// https://sqs.us-east-1.amazonaws.com/248189928110/syncme-task-ImportQueue-wU1CQKDz3gWq
