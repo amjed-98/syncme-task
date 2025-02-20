@@ -2,7 +2,7 @@
 
 This project is a **serverless API** built using **AWS Lambda, API Gateway, SQS, and DynamoDB** to manage WooCommerce product categories. It provides the following functionalities:
 
-- **Import product categories asynchronously** from WooCommerce.
+- **Import product categories asynchronously** from a WooCommerce site.
 - **Retrieve all stored categories** from DynamoDB.
 - **Delete a category by ID**.
 - **Check the status of an ongoing import process**.
@@ -28,7 +28,7 @@ This project is a **serverless API** built using **AWS Lambda, API Gateway, SQS,
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-repo/syncme-task.git
+   git clone github.com/amjed-98/syncme-task
    cd syncme-task
    ```
 2. **Install Dependencies**
@@ -48,7 +48,7 @@ This project is a **serverless API** built using **AWS Lambda, API Gateway, SQS,
 **Request:**
 
 ```bash
-curl -X POST https://your-api-url/import
+curl -X POST https://your-api-gatway-url/import
 ```
 
 **Response:**
@@ -65,7 +65,7 @@ curl -X POST https://your-api-url/import
 **Request:**
 
 ```bash
-curl -X GET https://your-api-url/status
+curl -X GET https://your-api-gateway-url/status
 ```
 
 **Response:**
@@ -73,7 +73,7 @@ curl -X GET https://your-api-url/status
 ```json
 {
   "success": true,
-  "import_status": "pending" | "in-progress" | "completed"
+  "import_status": "pending" | "in-progress" | "completed" | "failed"
 }
 ```
 
@@ -82,7 +82,7 @@ curl -X GET https://your-api-url/status
 **Request:**
 
 ```bash
-curl -X GET https://your-api-url/categories
+curl -X GET https://your-api-gateway-url/categories
 ```
 
 **Response:**
@@ -92,10 +92,11 @@ curl -X GET https://your-api-url/categories
   "success": true,
   "data": [
     {
-      "CategoryID": "15",
-      "Name": "Clothing",
-      "discription": "",
-      "Parent": "23"
+      "Description": "",
+      "CategoryID": "92",
+      "ParentID": "90",
+      "Name": "Business Laptop",
+      "Display": "default"
     }
   ]
 }
@@ -106,7 +107,7 @@ curl -X GET https://your-api-url/categories
 **Request:**
 
 ```bash
-curl -X DELETE https://your-api-url/categories/15
+curl -X DELETE https://your-api-gateway-url/categories/15
 ```
 
 **Response:**
@@ -126,4 +127,3 @@ This project is licensed under the **MIT License**.
 
 👨‍💻 **Amjad Yahia**\
 📧 Email: [amjadyahia.dev@gmail.com](mailto:amjadyahia.dev@gmail.com)\
-🔗 GitHub: [amjed-98](https://github.com/amjed-98)
