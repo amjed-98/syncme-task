@@ -45,6 +45,8 @@ This project is a **serverless API** built using **AWS Lambda, API Gateway, SQS,
 
 ![Architecture Diagram](diagram.png)
 
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/22871956-79dcb30d-c13e-4fa8-a482-6f4a930a5e9e?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D22871956-79dcb30d-c13e-4fa8-a482-6f4a930a5e9e%26entityType%3Dcollection%26workspaceId%3D15013a68-0290-4731-bf05-294e304b14e1#?env%5Bsyncme-prod%5D=W3sia2V5IjoiYXBpLXVybCIsInZhbHVlIjoiaHR0cHM6Ly83c3ZsdzBkajUyLmV4ZWN1dGUtYXBpLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tL1Byb2QiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCIsInNlc3Npb25WYWx1ZSI6Imh0dHBzOi8vN3N2bHcwZGo1Mi5leGVjdXRlLWFwaS51cy1lYXN0LTEuYW1hem9uYXdzLmNvbS9Qcm9kIiwiY29tcGxldGVTZXNzaW9uVmFsdWUiOiJodHRwczovLzdzdmx3MGRqNTIuZXhlY3V0ZS1hcGkudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20vUHJvZCIsInNlc3Npb25JbmRleCI6MH1d)
+
 ## API Endpoints
 
 ### 1️⃣ Import Categories (Async)
