@@ -2,7 +2,7 @@
   "name": "syncme-task",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc && pnpm prune --prod && sam build",
+    "build": "pnpm i && tsc && pnpm prune --prod && sam build",
     "build:deploy": "pnpm build && sam deploy"
   },
   "keywords": [],

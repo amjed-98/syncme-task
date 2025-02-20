@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 import { ImportStatusService } from "../services/import-status.service";
-import { ErrorResponse, sleep, SuccessResponse } from "../utils";
+import { ErrorResponse, SuccessResponse } from "../utils";
 
 const sqs = new AWS.SQS();
 
@@ -13,7 +13,6 @@ export async function handler() {
       QueueUrl: process.env.SQS_QUEUE_URL!,
     };
 
-    await sleep(2000);
     await sqs.sendMessage(sqsParams).promise();
 
     return new SuccessResponse(202, { message: "Import request received" });
